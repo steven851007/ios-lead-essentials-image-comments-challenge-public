@@ -52,6 +52,12 @@ You'll develop the API, Presentation, UI, and Composition for the 'Image Comment
 
 8) Write tests to validate your implementation, including unit, integration, and snapshot tests (aim to write the test first!).
 
+	- ⚠️ Important: ***Different simulators may generate slightly different snapshots (even if they look the same!).*** So you must run the snapshot tests using the exact same simulator used to take the snapshots:
+
+		- Use *precisely* the 'iPhone 13 - iOS 15.0' simulator.
+
+	- Do not change any existing snapshot. They're there to validate your implementation.
+
 9) Follow the specs below and test-drive this feature from scratch:
 
 
@@ -190,15 +196,11 @@ Given the customer doesn't have connectivity
 
 1) Fork the latest version of this repository. Here's <a href="https://guides.github.com/activities/forking" target="_blank">how forking works</a>.
 
-2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 12.5.
+2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 13.0.
 	
-	- Older Xcode versions are not supported.
+	- Other Xcode versions are not supported.
 	
-	- Challenges submitted with branches other than `xcode12_5` will be rejected.
-
-	- ⚠️ Important: ***Different simulators may generate slightly different snapshots (even if they look the same!).*** So you must run the snapshot tests using the exact same simulator used to take the snapshots:
-
-		- iPhone 12 - iOS 14.5
+	- Challenges submitted with branches other than `xcode13_0` will be rejected.
 
 	- Do not change the indentation in the project.
 
@@ -273,11 +275,11 @@ Given the customer doesn't have connectivity
 
 	- If it does, create a Pull Request from your branch to the main challenge repo's matching branch.
 
-		- For example, if you implemented the challenge using the `xcode12_5` branch, your PR should be from your fork's `xcode12_5` branch into the main repo's `xcode12_5` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
+		- For example, if you implemented the challenge using the `xcode13_0` branch, your PR should be from your fork's `xcode13_0` branch into the main repo's `xcode13_0` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
 
 	- The title of the Pull Request should be: **Your Name - Image Comments Challenge**
 
-7) We'll review your Pull Request and approve it or request any changes required with detailed feedback.
+7) As soon as you create a Pull Request, we automatically receive a notification. You just need to create it and wait while we review your Pull Request and approve it or request any changes required with detailed feedback.
 
 
 ---
