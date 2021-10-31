@@ -196,11 +196,11 @@ Given the customer doesn't have connectivity
 
 1) Fork the latest version of this repository. Here's <a href="https://guides.github.com/activities/forking" target="_blank">how forking works</a>.
 
-2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 13.0.
+2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 13.1.
 	
 	- Other Xcode versions are not supported.
 	
-	- Challenges submitted with branches other than `xcode13_0` will be rejected.
+		- Challenges submitted with branches other than `xcode13_1` will be rejected.
 
 	- Do not change the indentation in the project.
 
@@ -275,7 +275,7 @@ Given the customer doesn't have connectivity
 
 	- If it does, create a Pull Request from your branch to the main challenge repo's matching branch.
 
-		- For example, if you implemented the challenge using the `xcode13_0` branch, your PR should be from your fork's `xcode13_0` branch into the main repo's `xcode13_0` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
+		- For example, if you implemented the challenge using the `xcode13_1` branch, your PR should be from your fork's `xcode13_1` branch into the main repo's `xcode13_1` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
 
 	- The title of the Pull Request should be: **Your Name - Image Comments Challenge**
 
