@@ -4,7 +4,9 @@
 
 import Foundation
 
-public struct ImageCommentViewModel {}
+public struct ImageCommentsViewModel {
+	public let imageComments: [ImageComment]
+}
 
 public final class ImageCommentsPresenter {
 	public static var title: String {
@@ -15,7 +17,7 @@ public final class ImageCommentsPresenter {
 			comment: "Title for the image comments view")
 	}
 
-	public static func map(_ image: ImageComment) -> ImageCommentViewModel {
-		ImageCommentViewModel()
+	public static func map(_ imageComments: [ImageComment]) -> ImageCommentsViewModel {
+		ImageCommentsViewModel(imageComments: imageComments)
 	}
 }
