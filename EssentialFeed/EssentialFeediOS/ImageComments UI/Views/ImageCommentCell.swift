@@ -5,7 +5,7 @@
 import UIKit
 
 public final class ImageCommentCell: UITableViewCell {
-	private(set) public var commentLabel: UILabel!
-	private(set) public var dateLabel: UILabel!
-	private(set) public var authorLabel: UILabel!
+	@IBOutlet private(set) public var commentLabel: UILabel!
+	@IBOutlet private(set) public var dateLabel: UILabel!
+	@IBOutlet private(set) public var authorLabel: UILabel!
 }

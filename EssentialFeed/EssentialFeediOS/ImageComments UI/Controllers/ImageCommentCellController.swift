@@ -23,9 +23,9 @@ extension ImageCommentCellController: UITableViewDataSource {
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		cell = tableView.dequeueReusableCell()
-//		cell?.commentLabel.text = viewModel.comment
-//		cell?.dateLabel.text = viewModel.date
-//		cell?.authorLabel.text = viewModel.author
+		cell?.commentLabel.text = viewModel.comment
+		cell?.dateLabel.text = viewModel.date
+		cell?.authorLabel.text = viewModel.author
 		return cell!
 	}
 }
