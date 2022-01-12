@@ -54,7 +54,7 @@ You'll develop the API, Presentation, UI, and Composition for the 'Image Comment
 
 	- ⚠️ Important: ***Different simulators may generate slightly different snapshots (even if they look the same!).*** So you must run the snapshot tests using the exact same simulator used to take the snapshots:
 
-		- Use *precisely* the 'iPhone 13 - iOS 15.0' simulator.
+		- Use *precisely* the 'iPhone 13 - iOS 15.2' simulator.
 
 	- Do not change any existing snapshot. They're there to validate your implementation.
 
@@ -196,11 +196,11 @@ Given the customer doesn't have connectivity
 
 1) Fork the latest version of this repository. Here's <a href="https://guides.github.com/activities/forking" target="_blank">how forking works</a>.
 
-2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 13.1.
+2) Open the `EssentialApp/EssentialApp.xcworkspace` on Xcode 13.2.1.
 	
 	- Other Xcode versions are not supported.
 	
-		- Challenges submitted with branches other than `xcode13_1` will be rejected.
+		- Challenges submitted with branches other than `xcode13_2_1` will be rejected.
 
 	- Do not change the indentation in the project.
 
@@ -275,7 +275,7 @@ Given the customer doesn't have connectivity
 
 	- If it does, create a Pull Request from your branch to the main challenge repo's matching branch.
 
-		- For example, if you implemented the challenge using the `xcode13_1` branch, your PR should be from your fork's `xcode13_1` branch into the main repo's `xcode13_1` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
+		- For example, if you implemented the challenge using the `xcode13_2_1` branch, your PR should be from your fork's `xcode13_2_1` branch into the main repo's `xcode13_2_1` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
 
 	- The title of the Pull Request should be: **Your Name - Image Comments Challenge**
 
