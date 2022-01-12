@@ -276,8 +276,10 @@ Given the customer doesn't have connectivity
 	- If it does, create a Pull Request from your branch to the main challenge repo's matching branch.
 
 		- For example, if you implemented the challenge using the `xcode13_2_1` branch, your PR should be from your fork's `xcode13_2_1` branch into the main repo's `xcode13_2_1` branch (DO NOT MIX Xcode versions or you'll have merge conflicts!).
-
-	- The title of the Pull Request should be: **Your Name - Image Comments Challenge**
+	
+	- The title of the Pull Request should be: Your Name - Image Comments Challenge
+	
+	- **Create only one Pull Request** and **do not close it**. If you have any issues, send a comment inside the Pull Request asking for help.
 
 7) As soon as you create a Pull Request, we automatically receive a notification. You just need to create it and wait while we review your Pull Request and approve it or request any changes required with detailed feedback.
 
