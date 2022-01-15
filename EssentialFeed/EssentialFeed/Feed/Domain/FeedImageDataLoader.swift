@@ -4,6 +4,16 @@
 
 import Foundation
 
+//public protocol ImageCommentsDataLoaderTask {
+//	func cancel()
+//}
+//
+//public protocol ImageCommentsDataLoader {
+//	typealias Result = Swift.Result<Data, Error>
+//
+//	func loadImageCommentsData(from url: URL, completion: @escaping (Result) -> Void) -> ImageCommentsDataLoaderTask
+//}
+
 public protocol FeedImageDataLoaderTask {
 	func cancel()
 }

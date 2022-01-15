@@ -3,16 +3,22 @@
 //
 
 import UIKit
+import Combine
 import EssentialFeed
 import EssentialFeediOS
 
 public final class CommentsUIComposer {
 	private init() {}
 
-	public static func commentsUIComposedWith() -> ListViewController {
-		let feedController = makeImageCommentsViewController(title: ImageCommentsPresenter.title)
-        
-		return feedController
+	private typealias CommentsPresentationAdapter = LoadResourcePresentationAdapter<[ImageComment], ImageCommentsViewAdapter>
+
+	public static func commentsUIComposedWith(
+		feedLoader: @escaping () -> AnyPublisher<[ImageComment], Error>) -> ListViewController {
+		let presentationAdapter = CommentsPresentationAdapter(loader: feedLoader)
+		let commentsController = makeImageCommentsViewController(title: ImageCommentsPresenter.title)
+		commentsController.onRefresh = presentationAdapter.loadResource
+
+		return commentsController
 	}
 
 	private static func makeImageCommentsViewController(title: String) -> ListViewController {
