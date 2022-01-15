@@ -10,7 +10,8 @@ class ImageCommentsSnapshotTests: XCTestCase {
 	func test_feedWithContent() {
 		let sut = makeSUT()
 
-		let imageComment = ImageComment(id: UUID(), message: "a message", createdAt: Date(), userName: "a user")
+		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim."
+		let imageComment = ImageComment(id: UUID(), message: message, createdAt: Date(), userName: "a user")
 		let cellConrollers = ImageCommentCellController(viewModel: ImageCommentPresenter.map(imageComment))
 
 		let control = CellController(id: UUID(), cellConrollers)
