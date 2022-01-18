@@ -7,7 +7,15 @@ import EssentialFeed
 import EssentialFeediOS
 
 final class ImageCommentsViewAdapter: ResourceView {
-	func display(_ viewModel: ImageCommentsViewModel) {}
+	private weak var controller: ListViewController?
+
+	init(controller: ListViewController) {
+		self.controller = controller
+	}
+
+	func display(_ viewModel: ImageCommentsViewModel) {
+		print("false")
+	}
 }
 
 final class FeedViewAdapter: ResourceView {
