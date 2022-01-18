@@ -6,18 +6,6 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 
-final class ImageCommentsViewAdapter: ResourceView {
-	private weak var controller: ListViewController?
-
-	init(controller: ListViewController) {
-		self.controller = controller
-	}
-
-	func display(_ viewModel: ImageCommentsViewModel) {
-		print("false")
-	}
-}
-
 final class FeedViewAdapter: ResourceView {
 	private weak var controller: ListViewController?
 	private let imageLoader: (URL) -> FeedImageDataLoader.Publisher

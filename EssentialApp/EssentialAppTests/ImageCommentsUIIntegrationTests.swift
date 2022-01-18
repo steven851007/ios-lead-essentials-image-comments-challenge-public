@@ -48,6 +48,22 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
 	}
 
+	func test_loadImageCommentsCompletion_rendersSuccessfullyLoadedFeed() {
+		let imageComment0 = makeImageComment()
+		let imageComment1 = makeImageComment(message: "Second Message", createdAt: Date.distantPast, userName: "Another user")
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		assertThat(sut, isRendering: [])
+
+		loader.completeImageCommentsLoading(with: [imageComment0], at: 0)
+		assertThat(sut, isRendering: [imageComment0])
+
+		sut.simulateUserInitiatedReload()
+		loader.completeImageCommentsLoading(with: [imageComment0, imageComment1], at: 1)
+		assertThat(sut, isRendering: [imageComment0, imageComment1])
+	}
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
@@ -56,6 +72,10 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		let loader = LoaderSpy()
 		let sut = CommentsUIComposer.commentsUIComposedWith(commentsLoader: loader.loadPublisher)
 		return (sut, loader)
+	}
+
+	private func makeImageComment(message: String = "Default message", createdAt: Date = Date(), userName: String = "A User") -> ImageComment {
+		return ImageComment(id: UUID(), message: message, createdAt: createdAt, userName: userName)
 	}
 }
 
