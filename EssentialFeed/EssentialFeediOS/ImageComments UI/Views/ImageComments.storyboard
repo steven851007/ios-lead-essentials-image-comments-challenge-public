@@ -19,14 +19,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCommentCell" id="4Tn-Gz-aNw" customClass="ImageCommentCell" customModule="EssentialFeediOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Tn-Gz-aNw" id="T2Q-hu-b8B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TZJ-Ky-zBy">
-                                            <rect key="frame" x="16" y="8" width="382" height="49"/>
+                                            <rect key="frame" x="16" y="6" width="382" height="49"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EbB-id-QYF">
                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -56,8 +56,8 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="TZJ-Ky-zBy" secondAttribute="trailing" constant="16" id="Pph-mO-fYp"/>
-                                        <constraint firstAttribute="bottom" secondItem="TZJ-Ky-zBy" secondAttribute="bottom" constant="8" id="ZiV-JN-Roa"/>
-                                        <constraint firstItem="TZJ-Ky-zBy" firstAttribute="top" secondItem="T2Q-hu-b8B" secondAttribute="top" constant="8" id="dTM-IL-E51"/>
+                                        <constraint firstAttribute="bottom" secondItem="TZJ-Ky-zBy" secondAttribute="bottom" priority="999" constant="6" id="ZiV-JN-Roa"/>
+                                        <constraint firstItem="TZJ-Ky-zBy" firstAttribute="top" secondItem="T2Q-hu-b8B" secondAttribute="top" priority="999" constant="6" id="dTM-IL-E51"/>
                                         <constraint firstItem="TZJ-Ky-zBy" firstAttribute="leading" secondItem="T2Q-hu-b8B" secondAttribute="leading" constant="16" id="peB-Ap-8Kv"/>
                                     </constraints>
                                 </tableViewCellContentView>
