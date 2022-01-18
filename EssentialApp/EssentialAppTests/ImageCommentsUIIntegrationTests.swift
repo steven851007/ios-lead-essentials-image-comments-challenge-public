@@ -64,6 +64,20 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		assertThat(sut, isRendering: [imageComment0, imageComment1])
 	}
 
+	func test_loadImageCommentsCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+		let imageComment0 = makeImageComment()
+		let imageComment1 = makeImageComment(message: "Second Message", createdAt: Date.distantPast, userName: "Another user")
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		loader.completeImageCommentsLoading(with: [imageComment0, imageComment1], at: 0)
+		assertThat(sut, isRendering: [imageComment0, imageComment1])
+
+		sut.simulateUserInitiatedReload()
+		loader.completeImageCommentsLoading(with: [], at: 1)
+		assertThat(sut, isRendering: [])
+	}
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
