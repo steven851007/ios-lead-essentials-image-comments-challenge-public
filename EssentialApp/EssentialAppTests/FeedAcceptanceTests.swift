@@ -51,6 +51,22 @@ class FeedAcceptanceTests: XCTestCase {
 		XCTAssertNotNil(store.feedCache, "Expected to keep non-expired cache")
 	}
 
+	func test_onTappingImage_commentsShown() {
+		let feed = launch(httpClient: .online(response), store: .empty)
+		let navController = feed.navigationController!
+		XCTAssertEqual(navController.viewControllers.count, 1)
+		feed.simulateTapOnFeedImage(at: 0)
+
+		RunLoop.current.run(until: Date())
+		XCTAssertEqual(navController.viewControllers.count, 2)
+		let imageComments = navController.topViewController as! ListViewController
+
+		XCTAssertEqual(imageComments.title, "Comments")
+		XCTAssertEqual(imageComments.numberOfRenderedComments(), 1)
+		XCTAssertEqual(imageComments.comment(at: 0), "Test message")
+		XCTAssertEqual(imageComments.author(at: 0), "a username")
+	}
+
 	// MARK: - Helpers
 
 	private func launch(
@@ -83,9 +99,26 @@ class FeedAcceptanceTests: XCTestCase {
 		case "/essential-feed/v1/feed":
 			return makeFeedData()
 
+		case "/essential-feed/v1/image/2AB2AE66-A4B7-4A16-B374-51BBAC8DB086/comments":
+			return makeCommentsData()
 		default:
 			return Data()
 		}
+	}
+
+	private func makeCommentsData() -> Data {
+		return try! JSONSerialization.data(withJSONObject:
+			[
+				"items":
+					[
+						[
+							"id": "2AB2AE66-A4B7-4A16-B374-51BBAC8DB086",
+							"message": "Test message",
+							"created_at": "2020-05-20T11:24:59+0000",
+							"author":
+								["username": "a username"]
+						]
+					]])
 	}
 
 	private func makeImageData() -> Data {
