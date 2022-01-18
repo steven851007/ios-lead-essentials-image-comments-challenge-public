@@ -33,15 +33,3 @@ class ImageCommentsSnapshotTests: XCTestCase {
 		return controller
 	}
 }
-
-//private extension ListViewController {
-//    func display(_ stubs: [ImageComment]) {
-//        let cells: [CellController] = stubs.map { stub in
-//            let cellController = ImageCommentCellController(viewModel: stub.viewModel, delegate: stub, selection: {})
-//            stub.controller = cellController
-//            return CellController(id: UUID(), cellController)
-//        }
-//
-//        display(cells)
-//    }
-//}
