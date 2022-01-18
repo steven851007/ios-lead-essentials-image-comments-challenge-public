@@ -103,6 +103,19 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		wait(for: [exp], timeout: 1.0)
 	}
 
+	func test_loadImageCommentsCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		XCTAssertEqual(sut.errorMessage, nil)
+
+		loader.completeImageCommentsLoadingWithError(at: 0)
+		XCTAssertEqual(sut.errorMessage, loadError)
+
+		sut.simulateUserInitiatedReload()
+		XCTAssertEqual(sut.errorMessage, nil)
+	}
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
