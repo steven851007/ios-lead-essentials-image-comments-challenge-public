@@ -64,7 +64,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		assertThat(sut, isRendering: [imageComment0, imageComment1])
 	}
 
-	func test_loadImageCommentsCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+	func test__rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
 		let imageComment0 = makeImageComment()
 		let imageComment1 = makeImageComment(message: "Second Message", createdAt: Date.distantPast, userName: "Another user")
 		let (sut, loader) = makeSUT()
@@ -76,6 +76,19 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		sut.simulateUserInitiatedReload()
 		loader.completeImageCommentsLoading(with: [], at: 1)
 		assertThat(sut, isRendering: [])
+	}
+
+	func test_loadImageCommentsCompletion_doesNotAlterCurrentRenderingStateOnError() {
+		let imageComment0 = makeImageComment()
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		loader.completeImageCommentsLoading(with: [imageComment0], at: 0)
+		assertThat(sut, isRendering: [imageComment0])
+
+		sut.simulateUserInitiatedReload()
+		loader.completeImageCommentsLoadingWithError(at: 1)
+		assertThat(sut, isRendering: [imageComment0])
 	}
 
 	private func makeSUT(
@@ -108,5 +121,10 @@ class LoaderSpy {
 
 	func completeImageCommentsLoading(with imageComments: [ImageComment] = [], at index: Int = 0) {
 		imageCommentsRequests[index].send(imageComments)
+	}
+
+	func completeImageCommentsLoadingWithError(at index: Int = 0) {
+		let error = NSError(domain: "an error", code: 0)
+		imageCommentsRequests[index].send(completion: .failure(error))
 	}
 }
