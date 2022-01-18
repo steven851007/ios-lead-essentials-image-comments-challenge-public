@@ -116,6 +116,21 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertEqual(sut.errorMessage, nil)
 	}
 
+	func test_tapOnErrorView_hidesErrorMessage() {
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		XCTAssertEqual(sut.errorMessage, nil)
+
+		loader.completeImageCommentsLoadingWithError(at: 0)
+		XCTAssertEqual(sut.errorMessage, loadError)
+
+		sut.simulateErrorViewTap()
+		XCTAssertEqual(sut.errorMessage, nil)
+	}
+
+	// MARK: - Helpers
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
@@ -128,28 +143,5 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 
 	private func makeImageComment(message: String = "Default message", createdAt: Date = Date(), userName: String = "A User") -> ImageComment {
 		return ImageComment(id: UUID(), message: message, createdAt: createdAt, userName: userName)
-	}
-}
-
-class LoaderSpy {
-	private var imageCommentsRequests = [PassthroughSubject<[ImageComment], Error>]()
-
-	var loadCommentsCallCount: Int {
-		return imageCommentsRequests.count
-	}
-
-	func loadPublisher() -> AnyPublisher<[ImageComment], Error> {
-		let publisher = PassthroughSubject<[ImageComment], Error>()
-		imageCommentsRequests.append(publisher)
-		return publisher.eraseToAnyPublisher()
-	}
-
-	func completeImageCommentsLoading(with imageComments: [ImageComment] = [], at index: Int = 0) {
-		imageCommentsRequests[index].send(imageComments)
-	}
-
-	func completeImageCommentsLoadingWithError(at index: Int = 0) {
-		let error = NSError(domain: "an error", code: 0)
-		imageCommentsRequests[index].send(completion: .failure(error))
 	}
 }
