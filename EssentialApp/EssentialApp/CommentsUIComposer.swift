@@ -19,14 +19,12 @@ public final class CommentsUIComposer {
 		let presentationAdapter = CommentsPresentationAdapter(loader: commentsLoader)
 		commentsController.onRefresh = presentationAdapter.loadResource
 
-		let presenter: LoadResourcePresenter<[ImageComment], ImageCommentsViewAdapter> = LoadResourcePresenter(
+		presentationAdapter.presenter = LoadResourcePresenter(
 			resourceView: ImageCommentsViewAdapter(
 				controller: commentsController),
 			loadingView: WeakRefVirtualProxy(commentsController),
 			errorView: WeakRefVirtualProxy(commentsController),
-			mapper: ImageCommentsMapper.map)
-
-		presentationAdapter.presenter = presenter
+			mapper: ImageCommentsPresenter.map)
 
 		return commentsController
 	}

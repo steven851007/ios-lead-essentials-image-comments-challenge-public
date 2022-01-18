@@ -32,13 +32,29 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertEqual(loader.loadCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
 	}
 
+	func test_loadingImageCommentsIndicator_isVisibleWhileLoadingFeed() {
+		let (sut, loader) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+
+		loader.completeImageCommentsLoading(at: 0)
+		XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+
+		sut.simulateUserInitiatedReload()
+		XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+
+		loader.completeImageCommentsLoading(at: 1)
+		XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+	}
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
 		line: UInt = #line
 	) -> (ListViewController, LoaderSpy) {
 		let loader = LoaderSpy()
-		let sut = CommentsUIComposer.commentsUIComposedWith(feedLoader: loader.loadPublisher)
+		let sut = CommentsUIComposer.commentsUIComposedWith(commentsLoader: loader.loadPublisher)
 		return (sut, loader)
 	}
 }
@@ -54,5 +70,9 @@ class LoaderSpy {
 		let publisher = PassthroughSubject<[ImageComment], Error>()
 		imageCommentsRequests.append(publisher)
 		return publisher.eraseToAnyPublisher()
+	}
+
+	func completeImageCommentsLoading(with imageComments: [ImageComment] = [], at index: Int = 0) {
+		imageCommentsRequests[index].send(imageComments)
 	}
 }
