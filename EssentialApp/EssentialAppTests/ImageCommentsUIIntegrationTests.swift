@@ -91,6 +91,18 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		assertThat(sut, isRendering: [imageComment0])
 	}
 
+	func test_loadImageCommentsCompletion_dispatchesFromBackgroundToMainThread() {
+		let (sut, loader) = makeSUT()
+		sut.loadViewIfNeeded()
+
+		let exp = expectation(description: "Wait for background queue")
+		DispatchQueue.global().async {
+			loader.completeImageCommentsLoading(at: 0)
+			exp.fulfill()
+		}
+		wait(for: [exp], timeout: 1.0)
+	}
+
 	private func makeSUT(
 		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
