@@ -52,19 +52,10 @@ class FeedAcceptanceTests: XCTestCase {
 	}
 
 	func test_onTappingImage_commentsShown() {
-		let feed = launch(httpClient: .online(response), store: .empty)
-		let navController = feed.navigationController!
-		XCTAssertEqual(navController.viewControllers.count, 1)
-		feed.simulateTapOnFeedImage(at: 0)
+		let imageComments = showCommendsForFirstFeedImage()
 
-		RunLoop.current.run(until: Date())
-		XCTAssertEqual(navController.viewControllers.count, 2)
-		let imageComments = navController.topViewController as! ListViewController
-
-		XCTAssertEqual(imageComments.title, "Comments")
 		XCTAssertEqual(imageComments.numberOfRenderedComments(), 1)
 		XCTAssertEqual(imageComments.comment(at: 0), "Test message")
-		XCTAssertEqual(imageComments.author(at: 0), "a username")
 	}
 
 	// MARK: - Helpers
@@ -79,6 +70,15 @@ class FeedAcceptanceTests: XCTestCase {
 
 		let nav = sut.window?.rootViewController as? UINavigationController
 		return nav?.topViewController as! ListViewController
+	}
+
+	private func showCommendsForFirstFeedImage() -> ListViewController {
+		let feed = launch(httpClient: .online(response), store: .empty)
+		let navController = feed.navigationController!
+		feed.simulateTapOnFeedImage(at: 0)
+
+		RunLoop.current.run(until: Date())
+		return navController.topViewController as! ListViewController
 	}
 
 	private func enterBackground(with store: InMemoryFeedStore) {

@@ -18,7 +18,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertEqual(sut.title, commentsTitle)
 	}
 
-	func test_loadImageCommentsActions_requestFeedFromLoader() {
+	func test_loadImageCommentsActions_requestCommentsFromLoader() {
 		let (sut, loader) = makeSUT()
 		XCTAssertEqual(loader.loadCommentsCallCount, 0, "Expected no loading requests before view is loaded")
 
@@ -32,7 +32,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertEqual(loader.loadCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
 	}
 
-	func test_loadingImageCommentsIndicator_isVisibleWhileLoadingFeed() {
+	func test_loadingImageCommentsIndicator_isVisibleWhileLoadingComments() {
 		let (sut, loader) = makeSUT()
 
 		sut.loadViewIfNeeded()
@@ -48,7 +48,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
 	}
 
-	func test_loadImageCommentsCompletion_rendersSuccessfullyLoadedFeed() {
+	func test_loadImageCommentsCompletion_rendersSuccessfullyLoadedComments() {
 		let imageComment0 = makeImageComment()
 		let imageComment1 = makeImageComment(message: "Second Message", createdAt: Date.distantPast, userName: "Another user")
 		let (sut, loader) = makeSUT()
@@ -64,7 +64,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		assertThat(sut, isRendering: [imageComment0, imageComment1])
 	}
 
-	func test__rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+	func test__rendersSuccessfullyLoadedEmptyCommentsAfterNonEmptyComments() {
 		let imageComment0 = makeImageComment()
 		let imageComment1 = makeImageComment(message: "Second Message", createdAt: Date.distantPast, userName: "Another user")
 		let (sut, loader) = makeSUT()
@@ -79,16 +79,16 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 	}
 
 	func test_loadImageCommentsCompletion_doesNotAlterCurrentRenderingStateOnError() {
-		let imageComment0 = makeImageComment()
+		let comment = makeImageComment()
 		let (sut, loader) = makeSUT()
 
 		sut.loadViewIfNeeded()
-		loader.completeImageCommentsLoading(with: [imageComment0], at: 0)
-		assertThat(sut, isRendering: [imageComment0])
+		loader.completeImageCommentsLoading(with: [comment], at: 0)
+		assertThat(sut, isRendering: [comment])
 
 		sut.simulateUserInitiatedReload()
 		loader.completeImageCommentsLoadingWithError(at: 1)
-		assertThat(sut, isRendering: [imageComment0])
+		assertThat(sut, isRendering: [comment])
 	}
 
 	func test_loadImageCommentsCompletion_dispatchesFromBackgroundToMainThread() {
@@ -132,12 +132,12 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 	// MARK: - Helpers
 
 	private func makeSUT(
-		selection: @escaping (FeedImage) -> Void = { _ in },
 		file: StaticString = #filePath,
 		line: UInt = #line
 	) -> (ListViewController, LoaderSpy) {
 		let loader = LoaderSpy()
 		let sut = CommentsUIComposer.commentsUIComposedWith(commentsLoader: loader.loadPublisher)
+		trackForMemoryLeaks(loader, file: file, line: line)
 		return (sut, loader)
 	}
 

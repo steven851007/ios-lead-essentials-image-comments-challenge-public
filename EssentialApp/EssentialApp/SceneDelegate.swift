@@ -56,19 +56,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 
 	private func showComments(for image: FeedImage) {
-		let commentsController = CommentsUIComposer.commentsUIComposedWith { [unowned self] in
-			self.makeRemoteCommentsLoader(imageId: image.id)
-		}
+		let commentsController = CommentsUIComposer.commentsUIComposedWith(commentsLoader: makeRemoteCommentsLoader(imageId: image.id))
 		navigationController.pushViewController(commentsController, animated: true)
 	}
 
-	private func makeRemoteCommentsLoader(imageId: UUID) -> AnyPublisher<[ImageComment], Error> {
-		let url = ImageCommentEndpoint.get.url(baseURL: baseURL, imageId: imageId)
-
-		return httpClient
-			.getPublisher(url: url)
-			.tryMap(ImageCommentsMapper.map)
-			.eraseToAnyPublisher()
+	private func makeRemoteCommentsLoader(imageId: UUID) -> () -> AnyPublisher<[ImageComment], Error> {
+		let url = ImageCommentEndpoint.get(imageId).url(baseURL: baseURL)
+		return { [httpClient] in
+			httpClient
+				.getPublisher(url: url)
+				.tryMap(ImageCommentsMapper.map)
+				.eraseToAnyPublisher()
+		}
 	}
 
 	private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Error> {

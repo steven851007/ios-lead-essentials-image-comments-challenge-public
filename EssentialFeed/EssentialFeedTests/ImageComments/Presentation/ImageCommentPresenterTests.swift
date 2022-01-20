@@ -7,17 +7,17 @@ import EssentialFeed
 
 class ImageCommentPresenterTests: XCTestCase {
 	func test_map_createsViewModel() {
-		let imageComment = uniqueImageComment().comment
+		let dateText = "21 years ago"
+		let imageComment = uniqueImageComment(date: Date(timeIntervalSinceReferenceDate: 0))
 
 		let viewModel = ImageCommentPresenter.map(imageComment)
 
 		XCTAssertEqual(viewModel.comment, imageComment.message)
-		XCTAssertEqual(viewModel.date, uniqueImageComment().relativeDate)
+		XCTAssertEqual(viewModel.date, dateText)
 		XCTAssertEqual(viewModel.author, imageComment.userName)
 	}
 
-	private func uniqueImageComment() -> (comment: ImageComment, relativeDate: String) {
-		let date = Date(timeIntervalSinceReferenceDate: 0)
-		return (ImageComment(id: UUID(), message: "a message", createdAt: date, userName: "a user"), RelativeDateTimeFormatter().string(for: date)!)
+	private func uniqueImageComment(date: Date) -> ImageComment {
+		return ImageComment(id: UUID(), message: "a message", createdAt: date, userName: "a user")
 	}
 }

@@ -48,8 +48,12 @@ extension ListViewController {
 		return feedImageView(at: index) as? FeedImageCell
 	}
 
-	func simulateImageCommentViewVisible(at index: Int) -> ImageCommentCell? {
-		return feedImageView(at: index) as? ImageCommentCell
+	private func imageCommentCell(at index: Int) -> ImageCommentCell? {
+		return cell(row: index, section: imageCommentsSection) as? ImageCommentCell
+	}
+
+	private var imageCommentsSection: Int {
+		return 0
 	}
 
 	@discardableResult
@@ -88,11 +92,11 @@ extension ListViewController {
 	}
 
 	func comment(at index: Int) -> String? {
-		return simulateImageCommentViewVisible(at: index)?.comment
+		return imageCommentCell(at: index)?.comment
 	}
 
 	func author(at index: Int) -> String? {
-		return simulateImageCommentViewVisible(at: index)?.userName
+		return imageCommentCell(at: index)?.userName
 	}
 
 	func numberOfRenderedFeedImageViews() -> Int {
@@ -100,7 +104,7 @@ extension ListViewController {
 	}
 
 	func numberOfRenderedComments() -> Int {
-		numberOfRows(in: feedImagesSection)
+		numberOfRows(in: imageCommentsSection)
 	}
 
 	func feedImageView(at row: Int) -> UITableViewCell? {

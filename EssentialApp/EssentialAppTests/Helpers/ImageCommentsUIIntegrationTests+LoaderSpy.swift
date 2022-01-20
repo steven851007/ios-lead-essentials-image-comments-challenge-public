@@ -8,7 +8,7 @@ import EssentialFeediOS
 import Combine
 
 extension ImageCommentsUIIntegrationTests {
-	class LoaderSpy {
+	final class LoaderSpy {
 		private var imageCommentsRequests = [PassthroughSubject<[ImageComment], Error>]()
 
 		var loadCommentsCallCount: Int {

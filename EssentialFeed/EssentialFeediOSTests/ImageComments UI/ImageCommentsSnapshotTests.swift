@@ -7,20 +7,23 @@ import EssentialFeediOS
 @testable import EssentialFeed
 
 class ImageCommentsSnapshotTests: XCTestCase {
-	func test_feedWithContent() {
+	func test_feedWithDefaultContent() {
 		let sut = makeSUT()
 
-		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim."
-		let imageComment = ImageComment(id: UUID(), message: message, createdAt: Date(), userName: "a user")
-		let cellConrollers = ImageCommentCellController(viewModel: ImageCommentPresenter.map(imageComment))
-
-		let control = CellController(id: UUID(), cellConrollers)
-
-		sut.display([control])
+		sut.display(defaultImageCommentsContent())
 
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "IMAGE_COMMENTS_WITH_CONTENT_light")
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "IMAGE_COMMENTS_WITH_CONTENT_dark")
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "IMAGE_COMMENTS_WITH_CONTENT_light_extraExtraExtraLarge")
+	}
+
+	func test_feedWithEdgeCaseContent() {
+		let sut = makeSUT()
+
+		sut.display(imageCommentsContentWithShortMessageAndLongUserName())
+
+		assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "IMAGE_COMMENTS_WITH_EDGE_CASE_CONTENT_light")
+		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "IMAGE_COMMENTS_WITH_EDGE_CASE_CONTENT_dark")
 	}
 
 	private func makeSUT() -> ListViewController {
@@ -31,5 +34,23 @@ class ImageCommentsSnapshotTests: XCTestCase {
 		controller.tableView.showsVerticalScrollIndicator = false
 		controller.tableView.showsHorizontalScrollIndicator = false
 		return controller
+	}
+
+	private func imageCommentsContentWithShortMessageAndLongUserName() -> [CellController] {
+		let imageComment = ImageComment(id: UUID(), message: "Short comment", createdAt: Date(timeIntervalSinceNow: -1200), userName: "This is a very long user name that might not fit into line one")
+
+		let cellConrollers = ImageCommentCellController(viewModel: ImageCommentPresenter.map(imageComment))
+
+		return [CellController(id: UUID(), cellConrollers)]
+	}
+
+	private func defaultImageCommentsContent() -> [CellController] {
+		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim."
+
+		let imageComment = ImageComment(id: UUID(), message: message, createdAt: Date(timeIntervalSinceNow: -120), userName: "a user")
+
+		let cellConrollers = ImageCommentCellController(viewModel: ImageCommentPresenter.map(imageComment))
+
+		return [CellController(id: UUID(), cellConrollers)]
 	}
 }
