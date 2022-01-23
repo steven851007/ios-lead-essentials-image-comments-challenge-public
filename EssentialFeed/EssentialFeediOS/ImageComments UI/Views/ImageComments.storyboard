@@ -55,10 +55,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="TZJ-Ky-zBy" secondAttribute="trailing" constant="16" id="Pph-mO-fYp"/>
+                                        <constraint firstAttribute="trailing" secondItem="TZJ-Ky-zBy" secondAttribute="trailing" priority="999" constant="16" id="Pph-mO-fYp"/>
                                         <constraint firstAttribute="bottom" secondItem="TZJ-Ky-zBy" secondAttribute="bottom" priority="999" constant="6" id="ZiV-JN-Roa"/>
                                         <constraint firstItem="TZJ-Ky-zBy" firstAttribute="top" secondItem="T2Q-hu-b8B" secondAttribute="top" priority="999" constant="6" id="dTM-IL-E51"/>
-                                        <constraint firstItem="TZJ-Ky-zBy" firstAttribute="leading" secondItem="T2Q-hu-b8B" secondAttribute="leading" constant="16" id="peB-Ap-8Kv"/>
+                                        <constraint firstItem="TZJ-Ky-zBy" firstAttribute="leading" secondItem="T2Q-hu-b8B" secondAttribute="leading" priority="999" constant="16" id="peB-Ap-8Kv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
