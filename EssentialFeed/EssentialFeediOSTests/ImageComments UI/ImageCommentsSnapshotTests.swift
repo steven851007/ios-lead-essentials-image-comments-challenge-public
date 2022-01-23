@@ -7,7 +7,7 @@ import EssentialFeediOS
 @testable import EssentialFeed
 
 class ImageCommentsSnapshotTests: XCTestCase {
-	func test_feedWithContent() {
+	func test_imageCommentsWithContent() {
 		let sut = makeSUT()
 
 		sut.display(imageCommentsContent())
