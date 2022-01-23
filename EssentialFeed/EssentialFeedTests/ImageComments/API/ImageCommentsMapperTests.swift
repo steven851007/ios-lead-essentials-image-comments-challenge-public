@@ -55,13 +55,13 @@ class ImageCommentsMapperTests: XCTestCase {
 
 	private var validSamples: [Int] { [200, 220, 260, 299] }
 
-	private func makeImageComment(id: UUID, message: String, createdAt: (String, Date), userName: String) -> (model: ImageComment, json: [String: Any]) {
-		let comment = ImageComment(id: id, message: message, createdAt: createdAt.1, userName: userName)
+	private func makeImageComment(id: UUID, message: String, createdAt: (string: String, date: Date), userName: String) -> (model: ImageComment, json: [String: Any]) {
+		let comment = ImageComment(id: id, message: message, createdAt: createdAt.date, userName: userName)
 
 		let json = [
 			"id": id.uuidString,
 			"message": message,
-			"created_at": createdAt.0,
+			"created_at": createdAt.string,
 			"author": ["username": userName]
 		].compactMapValues { $0 }
 

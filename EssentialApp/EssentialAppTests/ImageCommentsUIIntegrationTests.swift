@@ -161,6 +161,7 @@ class ImageCommentsUIIntegrationTests: XCTestCase {
 		let loader = LoaderSpy()
 		let sut = CommentsUIComposer.commentsUIComposedWith(commentsLoader: loader.loadPublisher)
 		trackForMemoryLeaks(loader, file: file, line: line)
+		trackForMemoryLeaks(sut, file: file, line: line)
 		return (sut, loader)
 	}
 
