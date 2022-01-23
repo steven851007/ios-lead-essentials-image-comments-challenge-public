@@ -40,7 +40,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
 	}
 
 	private func longCommentCellController() -> CellController {
-		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim."
+		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim.."
 
 		let imageComment = ImageComment(id: UUID(), message: message, createdAt: Date(timeIntervalSinceNow: -120), userName: "a user")
 
