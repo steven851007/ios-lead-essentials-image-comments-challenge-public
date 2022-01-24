@@ -28,7 +28,7 @@ class ImageCommentsSnapshotTests: XCTestCase {
 	}
 
 	private func imageCommentsContent() -> [CellController] {
-		[shortCommentCellController(), longCommentCellController()]
+		[longCommentCellController(), shortCommentCellController()]
 	}
 
 	private func shortCommentCellController() -> CellController {
