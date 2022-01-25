@@ -32,20 +32,16 @@ class ImageCommentsSnapshotTests: XCTestCase {
 	}
 
 	private func shortCommentCellController() -> CellController {
-		let shortImageComment = ImageComment(id: UUID(), message: "Short comment", createdAt: Date(timeIntervalSinceNow: -1200), userName: "This is a very long user name that might not fit into line one")
+		let viewModel = ImageCommentViewModel(comment: "Short comment", date: "5 minutes ago", author: "This is a very long user name that might not fit into line one")
 
-		let cellController = ImageCommentCellController(viewModel: ImageCommentPresenter.map(shortImageComment))
-
-		return CellController(id: UUID(), cellController)
+		return CellController(id: UUID(), ImageCommentCellController(viewModel: viewModel))
 	}
 
 	private func longCommentCellController() -> CellController {
 		let message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet vitae lorem at placerat. Nam sollicitudin diam vel augue tincidunt consectetur. Pellentesque ultricies ligula ut ipsum ultricies fermentum. Pellentesque ut purus sit amet lacus egestas lobortis. Curabitur varius in leo quis laoreet. Sed ac sagittis sapien, viverra interdum enim.."
 
-		let imageComment = ImageComment(id: UUID(), message: message, createdAt: Date(timeIntervalSinceNow: -120), userName: "a user")
+		let viewModel = ImageCommentViewModel(comment: message, date: "2 hours ago", author: "a user")
 
-		let cellController = ImageCommentCellController(viewModel: ImageCommentPresenter.map(imageComment))
-
-		return CellController(id: UUID(), cellController)
+		return CellController(id: UUID(), ImageCommentCellController(viewModel: viewModel))
 	}
 }
